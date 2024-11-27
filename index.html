@@ -1538,11 +1538,11 @@ document.addEventListener('keydown', (event) => {
     
     switch(event.key) {
         case 'ArrowUp':
-            characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight 50);
+            characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 10);
             character.style.bottom = characterBottom + 'px';
             break;
         case 'ArrowDown':
-            characterBottom = Math.max(characterBottom - MOVE_STEP, 0);
+            characterBottom = Math.max(characterBottom - MOVE_STEP, - 1);
             character.style.bottom = characterBottom + 'px';
             break;
     }
@@ -1556,7 +1556,7 @@ upBtn.addEventListener('touchstart', (e) => {
     e.preventDefault();
     function moveUp() {
         if (!gameActive || isPaused) return;
-        characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight 50);
+        characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 10);
         character.style.bottom = characterBottom + 'px';
         upBtn.timeoutId = setTimeout(moveUp, 50);
     }
@@ -1571,7 +1571,7 @@ upBtn.addEventListener('mousedown', (e) => {
     e.preventDefault();
     function moveUp() {
         if (!gameActive || isPaused) return;
-        characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight 50);
+        characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 10);
         character.style.bottom = characterBottom + 'px';
         upBtn.timeoutId = setTimeout(moveUp, 50);
     }

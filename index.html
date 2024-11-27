@@ -30,7 +30,7 @@
     height: 80px;
     position: absolute;
     bottom: 0;
-    left: 35px; /* Changed from 50px to move car more to left */
+    left: 50px; /* Changed from 50px to move car more to left */
     transition: transform 0.1s, bottom 0.1s; /* Add bottom transition */
     z-index: 2;
     cursor: pointer;
@@ -1058,7 +1058,7 @@ function startLevel(level) {
     
     // Reset character position if needed
     const character = document.querySelector('.character');
-    character.style.left = '35px';
+    character.style.left = '50px';
     character.style.bottom = '0px';
     
     // Update game class for season
@@ -1166,7 +1166,7 @@ function transitionToNextLevel(nextLevel) {
     setTimeout(() => {
         // Reset character position
         character.classList.remove('transition');
-        character.style.left = '35px';
+        character.style.left = '50px';
         character.style.bottom = '0px';
         
         // Remove transition overlay
@@ -1194,7 +1194,7 @@ function startLevel(level) {
     
     // Reset character position if needed
     const character = document.querySelector('.character');
-    character.style.left = '35px';
+    character.style.left = '50px';
     character.style.bottom = '0px';
     
     // Update game class for season
@@ -1310,7 +1310,7 @@ function returnToMainMenu() {
     document.querySelector('.pause-menu').style.display = 'none';
     document.querySelector('.start-menu').style.display = 'flex';
     document.querySelectorAll('.enemy, .bubble').forEach(element => element.remove());
-    character.style.left = '35px';
+    character.style.left = '50px';
     character.style.bottom = '0px';
     updateStartMenu();
 }
@@ -1326,7 +1326,7 @@ function restartGame() {
     modal.style.display = 'none';
     document.querySelector('.pause-menu').style.display = 'none';
     document.querySelectorAll('.enemy, .bubble').forEach(element => element.remove());
-    character.style.left = '35px';
+    character.style.left = '50px';
     character.style.bottom = '0px';
     
     // Resume all animations
@@ -1538,7 +1538,7 @@ document.addEventListener('keydown', (event) => {
     
     switch(event.key) {
         case 'ArrowUp':
-            characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 110);
+            characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 50);
             character.style.bottom = characterBottom + 'px';
             break;
         case 'ArrowDown':
@@ -1556,7 +1556,7 @@ upBtn.addEventListener('touchstart', (e) => {
     e.preventDefault();
     function moveUp() {
         if (!gameActive || isPaused) return;
-        characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 110);
+        characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 50);
         character.style.bottom = characterBottom + 'px';
         upBtn.timeoutId = setTimeout(moveUp, 50);
     }
@@ -1571,7 +1571,7 @@ upBtn.addEventListener('mousedown', (e) => {
     e.preventDefault();
     function moveUp() {
         if (!gameActive || isPaused) return;
-        characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 110);
+        characterBottom = Math.min(characterBottom + MOVE_STEP, window.innerHeight - 50);
         character.style.bottom = characterBottom + 'px';
         upBtn.timeoutId = setTimeout(moveUp, 50);
     }

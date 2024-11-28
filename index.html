@@ -990,7 +990,7 @@ function handleMovement() {
 
     if (keysPressed['ArrowUp']) {
         const maxHeight = getMaxCharacterHeight();
-        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 50); // Subtract character height
+        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 120); // Subtract character height
         character.style.bottom = characterBottom + 'px';
     }
     if (keysPressed['ArrowDown']) {

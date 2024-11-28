@@ -26,15 +26,15 @@
 }
 
 .character {
-    width: 120px;
-    height: 80px;
+    width: 130px;
+    height: 90px;
     position: absolute;
     bottom: 0;
     left: 50px;
     transition: transform 0.1s, bottom 0.1s;
     z-index: 2;
     cursor: pointer;
-    background-image: url('/IMG_1224.png');
+    background-image: url('https://raw.githubusercontent.com/ugurhan6161/HisarOyun/refs/heads/main/IMG_1224.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -911,6 +911,7 @@
     <div class="score">Puan: <span id="scoreValue">0</span></div>
     <div class="character">
         <div class="company-name">Hisar Temizlik</div>
+        <div class="company-name">Trabzon</div>
     </div>
     <div class="ground">
         <div class="road-lines">
@@ -944,7 +945,7 @@
 <div class="modal">
     <h2>Oyun Bitti!</h2>
     <p>Puanınız: <span id="finalScore">0</span></p>
-    <button onclick="restartGame()">Tekrar Başlat</button>
+        <button onclick="returnToMainMenu()">Ana Menü</button>
 </div>
 
 <div class="level-start-modal">
@@ -1210,7 +1211,6 @@ function showLevelSuccess() {
             ${Array(stars).fill('⭐').join('')}
         </div>
         ${currentLevel < 4 ? `<button onclick="transitionToNextLevel(${currentLevel + 1})">Sonraki Bölüm</button>` : ''}
-        <button onclick="restartLevel()">Tekrar Dene</button>
         <button onclick="returnToMainMenu()">Ana Menü</button>
     `;
     document.body.appendChild(successModal);
@@ -1336,7 +1336,6 @@ function showLevelSuccess() {
             ${Array(stars).fill('⭐').join('')}
         </div>
         ${currentLevel < 4 ? `<button onclick="transitionToNextLevel(${currentLevel + 1})">Sonraki Bölüm</button>` : ''}
-        <button onclick="restartLevel()">Tekrar Dene</button>
         <button onclick="returnToMainMenu()">Ana Menü</button>
     `;
     document.body.appendChild(successModal);

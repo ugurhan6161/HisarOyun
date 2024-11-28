@@ -34,7 +34,7 @@
     transition: transform 0.1s, bottom 0.1s;
     z-index: 2;
     cursor: pointer;
-    background-image: url('https://raw.githubusercontent.com/ugurhan6161/HisarOyun/refs/heads/main/IMG_1224.png');
+    background-image: url('/IMG_1224.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -748,7 +748,6 @@
         <div class="pause-menu-content">
             <h2>Oyun Duraklatıldı</h2>
             <button class="menu-button" onclick="resumeGame()">Devam Et</button>
-            <button class="menu-button" onclick="restartGame()">Tekrar Başlat</button>
             <button class="menu-button" onclick="returnToMainMenu()">Ana Menü</button>
         </div>
     </div>
@@ -1188,6 +1187,7 @@ function closeCelebrationModal() {
 
 function showLevelSuccess() {
     gameActive = false;
+    pauseLevelMusic(); // Add this line
     const stars = score >= 300 ? 3 : score >= 100 ? 2 : score > 0 ? 1 : 0;
     localStorage.setItem(`level${currentLevel}Score`, score);
 
@@ -1237,15 +1237,8 @@ function startLevel(level) {
     const level4Music = document.getElementById('level4Music');
     
     // Stop all music first
-    level1Music.pause();
-    level1Music.currentTime = 0;
-    level2Music.pause();
-    level2Music.currentTime = 0;
-    level3Music.pause();
-    level3Music.currentTime = 0;
-    level4Music.pause();
-    level4Music.currentTime = 0;
-    
+    pauseLevelMusic(); // Add this line
+
     // Play appropriate level music
     if (level === 1) {
         level1Music.currentTime = 0;
@@ -1282,10 +1275,10 @@ function startLevel(level) {
 
 function closeLevelStartModal() {
     document.querySelector('.level-start-modal').style.display = 'none';
-    // Start game systems
     startGame();
     startWeatherEffect(levels[currentLevel].season);
     startLevelTimer();
+    resumeLevelMusic(); // Add this line
 }
 
 function startLevelTimer() {
@@ -1320,6 +1313,7 @@ function startLevelTimer() {
 
 function showLevelSuccess() {
     gameActive = false;
+    pauseLevelMusic(); // Add this line
     const stars = score >= 300 ? 3 : score >= 100 ? 2 : score > 0 ? 1 : 0;
     localStorage.setItem(`level${currentLevel}Score`, score); // Store the score
 
@@ -1418,14 +1412,7 @@ function startLevel(level) {
     const level4Music = document.getElementById('level4Music');
     
     // Stop all music first
-    level1Music.pause();
-    level1Music.currentTime = 0;
-    level2Music.pause();
-    level2Music.currentTime = 0;
-    level3Music.pause();
-    level3Music.currentTime = 0;
-    level4Music.pause();
-    level4Music.currentTime = 0;
+    pauseLevelMusic(); // Add this line
     
     // Play appropriate level music
     if (level === 1) {
@@ -1545,6 +1532,7 @@ function pauseGame() {
     if (!isGameStarted) return;
     isPaused = true;
     gameActive = false;
+    pauseLevelMusic(); // Add this line
     document.querySelector('.pause-menu').style.display = 'flex';
 }
 
@@ -1552,24 +1540,12 @@ function resumeGame() {
     isPaused = false;
     gameActive = true;
     document.querySelector('.pause-menu').style.display = 'none';
-    spawnEnemies();
+    resumeLevelMusic(); // Add this line
 }
 
 function returnToMainMenu() {
     // Stop all level music
-    const level1Music = document.getElementById('level1Music');
-    const level2Music = document.getElementById('level2Music');
-    const level3Music = document.getElementById('level3Music');
-    const level4Music = document.getElementById('level4Music');
-    
-    level1Music.pause();
-    level1Music.currentTime = 0;
-    level2Music.pause();
-    level2Music.currentTime = 0;
-    level3Music.pause();
-    level3Music.currentTime = 0;
-    level4Music.pause();
-    level4Music.currentTime = 0;
+    pauseLevelMusic(); // Add this line
 
     // Rest of the existing returnToMainMenu code...
     clearTimer(); 
@@ -1619,24 +1595,10 @@ function gameOver() {
     clearInterval(weatherInterval);
     clearInterval(levelTimer);
     
-    // Stop level music
-    if (currentLevel === 1) {
-        const level1Music = document.getElementById('level1Music');
-        level1Music.pause();
-        level1Music.currentTime = 0;
-    } else if (currentLevel === 2) {
-        const level2Music = document.getElementById('level2Music');
-        level2Music.pause();
-        level2Music.currentTime = 0;
-    } else if (currentLevel === 3) {
-        const level3Music = document.getElementById('level3Music');
-        level3Music.pause();
-        level3Music.currentTime = 0;
-    } else if (currentLevel === 4) {
-        const level4Music = document.getElementById('level4Music');
-        level4Music.pause();
-        level4Music.currentTime = 0;
-    }
+    pauseLevelMusic(); // Add this line
+    // Play win sound
+    const loseSound = document.getElementById('loseSound');
+    loseSound.play();
 
     // Show game over modal after explosion animation
     setTimeout(() => {
@@ -1860,6 +1822,51 @@ function updateLevelCardBackgrounds() {
     levelCards[1].style.background = 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e)';
     levelCards[2].style.background = 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1507371341162-763b5e419423)'; 
     levelCards[3].style.background = 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1457269449834-928af64c684d)';
+}
+
+// Add this function to pause level music
+function pauseLevelMusic() {
+    const level1Music = document.getElementById('level1Music');
+    const level2Music = document.getElementById('level2Music');
+    const level3Music = document.getElementById('level3Music');
+    const level4Music = document.getElementById('level4Music');
+    
+    level1Music.pause();
+    level2Music.pause();
+    level3Music.pause();
+    level4Music.pause();
+}
+
+// Add this function to resume level music
+function resumeLevelMusic() {
+    if (!gameActive) return;
+    
+    if (currentLevel === 1) {
+        document.getElementById('level1Music').play();
+    } else if (currentLevel === 2) {
+        document.getElementById('level2Music').play();
+    } else if (currentLevel === 3) {
+        document.getElementById('level3Music').play();
+    } else if (currentLevel === 4) {
+        document.getElementById('level4Music').play();
+    }
+}
+
+// Modify pauseGame function
+function pauseGame() {
+    if (!isGameStarted) return;
+    isPaused = true;
+    gameActive = false;
+    pauseLevelMusic(); // Add this line
+    document.querySelector('.pause-menu').style.display = 'flex';
+}
+
+// Modify resumeGame function
+function resumeGame() {
+    isPaused = false;
+    gameActive = true;
+    document.querySelector('.pause-menu').style.display = 'none';
+    resumeLevelMusic(); // Add this line
 }
 </script>
 </body></html>

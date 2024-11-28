@@ -990,7 +990,7 @@ function handleMovement() {
 
     if (keysPressed['ArrowUp']) {
         const maxHeight = getMaxCharacterHeight();
-        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 120); // Subtract character height
+        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 110); // Subtract character height
         character.style.bottom = characterBottom + 'px';
     }
     if (keysPressed['ArrowDown']) {
@@ -1022,7 +1022,7 @@ upBtn.addEventListener('touchstart', (e) => {
     function moveUp() {
         if (!gameActive || isPaused) return;
         const maxHeight = getMaxCharacterHeight();
-        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight);
+        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 110);
         character.style.bottom = characterBottom + 'px';
         upBtn.timeoutId = setTimeout(moveUp, 50);
     }

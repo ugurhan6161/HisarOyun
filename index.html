@@ -1550,7 +1550,8 @@ function returnToMainMenu() {
     clearInterval(weatherInterval);
     document.querySelector('.weather')?.remove();
     document.querySelector('.success-modal')?.remove();
-    document.querySelector('.modal')?.remove();
+
+
     
     isPaused = false;
     isGameStarted = false;
@@ -1559,6 +1560,7 @@ function returnToMainMenu() {
     scoreElement.textContent = '0';
     document.querySelector('.pause-menu').style.display = 'none';
     document.querySelector('.start-menu').style.display = 'flex';
+    document.querySelector('.modal').style.display = 'none';
     document.querySelectorAll('.enemy, .bubble').forEach(element => element.remove());
     character.style.left = '50px';
     character.style.bottom = '0px';

@@ -944,7 +944,7 @@
 <div class="modal">
     <h2>Oyun Bitti!</h2>
     <p>Puanınız: <span id="finalScore">0</span></p>
-        <button onclick="returnToMainMenu()">Ana Menü</button>
+        <button onclick="()">Ana Menü</button>
 </div>
 
 <div class="level-start-modal">
@@ -990,7 +990,7 @@ function handleMovement() {
 
     if (keysPressed['ArrowUp']) {
         const maxHeight = getMaxCharacterHeight();
-        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 110); // Subtract character height
+        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 90); // Subtract character height
         character.style.bottom = characterBottom + 'px';
     }
     if (keysPressed['ArrowDown']) {
@@ -1022,13 +1022,13 @@ upBtn.addEventListener('touchstart', (e) => {
     function moveUp() {
         if (!gameActive || isPaused) return;
         const maxHeight = getMaxCharacterHeight();
-        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 110);
+        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 90);
         character.style.bottom = characterBottom + 'px';
         upBtn.timeoutId = setTimeout(moveUp, 50);
     }
     moveUp();
 });
-
+    
 upBtn.addEventListener('touchend', (e) => {
     clearTimeout(upBtn.timeoutId);
 });
@@ -1550,6 +1550,7 @@ function returnToMainMenu() {
     clearInterval(weatherInterval);
     document.querySelector('.weather')?.remove();
     document.querySelector('.success-modal')?.remove();
+    document.querySelector('.modal')?.remove();
     
     isPaused = false;
     isGameStarted = false;

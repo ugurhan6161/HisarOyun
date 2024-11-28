@@ -26,8 +26,8 @@
 }
 
 .character {
-    width: 130px;
-    height: 90px;
+    width: 120px;
+    height: 80px;
     position: absolute;
     bottom: 0;
     left: 50px;
@@ -991,7 +991,7 @@ function handleMovement() {
 
     if (keysPressed['ArrowUp']) {
         const maxHeight = getMaxCharacterHeight();
-        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 80); // Subtract character height
+        characterBottom = Math.min(characterBottom + MOVE_STEP, maxHeight - 50); // Subtract character height
         character.style.bottom = characterBottom + 'px';
     }
     if (keysPressed['ArrowDown']) {
